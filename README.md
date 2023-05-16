@@ -34,6 +34,27 @@ Publishing artifact to Nexus snapshot and release repo using maven.
 11. Change the version from 1.0-Snapshot to 1.0
 12. Run `mvn deploy` to deploy to Snapshot Repo or `mvn clean deploy -P release`, to deploy it to Release Repo
 
+## Maven Installation
+```
+sudo yum install java-1.8.0-openjdk
+sudo yum install java-1.8.0-openjdk-devel
+sudo yum install wget -y
+wget https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -P /tmp
+sudo tar -xzvf /tmp/apache-maven-3.6.3-bin.tar.gz -C /opt
+sudo ln -s /opt/apache-maven-3.6.3 /opt/maven
+```
+```
+# sudo vi /etc/profile.d/maven.sh 
+  export JAVA_HOME=/usr/lib/jvm/jre-openjdk
+  export M2_HOME=/opt/maven
+  export MAVEN_HOME=/opt/maven
+  export PATH=${M2_HOME}/bin:${PATH}
+```
+```
+source /etc/profile.d/maven.sh
+mvn -version
+```
+
 ## Maven Lifecycle Phases
 - https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#a-build-lifecycle-is-made-up-of-phases
 
