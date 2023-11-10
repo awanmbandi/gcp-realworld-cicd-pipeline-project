@@ -20,3 +20,8 @@ sudo systemctl start jenkins && sudo systemctl enable jenkins
 ## To check the status of the service
 sudo systemctl status jenkins
 
+## VM Instaructions
+# Image: Ubuntu 22.04
+# Instance type: 2CPU and 4 or 8+RAM
+
+

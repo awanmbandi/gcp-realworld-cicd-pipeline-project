@@ -119,5 +119,6 @@ sudo systemctl status sonar
 sudo tail -f /opt/sonarqube/logs/sonar.log
 
 
-
-
+## VM Instaructions
+# Image: Ubuntu 22.04
+# Instance type: 2CPU and 4 or 8+RAM
