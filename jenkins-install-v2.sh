@@ -20,7 +20,7 @@ sudo systemctl start jenkins && sudo systemctl enable jenkins
 ## To check the status of the service
 sudo systemctl status jenkins
 ## Install git
-sudo yum install git -y
+sudo apt install git -y
 
 ## VM Instaructions
 # Image: Ubuntu 22.04
