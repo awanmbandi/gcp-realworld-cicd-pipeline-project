@@ -42,4 +42,3 @@ sudo wget https://raw.githubusercontent.com/awanmbandi/gcp-realworld-cicd-pipeli
 -P /var/lib/jenkins/.m2/
 sudo chown -R jenkins:jenkins /var/lib/jenkins/.m2/
 
-
