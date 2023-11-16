@@ -1,4 +1,7 @@
 #!/bin/bash
+###############################################################
+####################### Install Jenkins #######################
+###############################################################
 ## Update the packages to their latest versions available after a fresh install of Ubuntu 22.04
 sudo apt-get update -y && sudo apt-get upgrade -y
 ## install Java OpenJDK 11
@@ -21,6 +24,13 @@ sudo systemctl start jenkins && sudo systemctl enable jenkins
 sudo systemctl status jenkins
 ## Install git
 sudo apt install git -y
+
+###############################################################
+######################## Install Maven ########################
+###############################################################
+sudo apt update
+sudo apt install maven -y
+mvn --version
 
 ## VM Instaructions
 # Image: Ubuntu 22.04
