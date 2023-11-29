@@ -10,7 +10,7 @@
 - [SonarQube](https://docs.sonarqube.org/) SonarQube Catches bugs and vulnerabilities in your app, with thousands of automated Static Code Analysis rules.
 - [Nexus](https://www.sonatype.com/) Nexus Manage Binaries and build artifacts across your software supply chain
 - [Ansible](https://docs.ansible.com/) Ansible will be used for the application deployment to both lower environments and production
-- [GCE](https://cloud.google.com/compute?hl=en) EC2 allows users to rent virtual computers (EC2) to run their own workloads and applications.
+- [GCE](https://cloud.google.com/compute?hl=en) GCE allows users to rent virtual computers (GCE) to run their own workloads and applications.
 - [Slack](https://slack.com/) Slack is a communication platform designed for collaboration which can be leveraged to build and develop a very robust DevOps culture. Will be used for Continuous feedback loop.
 
 # Jenkins Complete CI/CD Pipeline Environment Setup Runbook
