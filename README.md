@@ -27,27 +27,27 @@
     - Confirm that the code exist on GitHub
 
 2) Jenkins/Maven/Ansible
-    - Create an Amazon Linux 2 VM instance 
+    - Create an Ubuntu 22.04 VM instance 
     - Name: Jenkins/Maven/Ansible
-    - Instance type: t2.medium
+    - Instance type: e2-standard-2
     - Security Group (Edit/Open): 8080, 9100 and 22 to 0.0.0.0/0
     - Key pair: Select or create a new keypair
     - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/jenkins-install.sh
     - Launch Instance
 
 3) SonarQube
-    - Create an Create an Ubuntu 20.04 VM instance 
+    - Create an Create an Ubuntu 22.04 VM instance 
     - Name: SonarQube
-    - Instance type: t2.medium
+    - Instance type: e2-standard-2
     - Security Group (Eit/Open): 9000, 9100 and 22 to 0.0.0.0/0
     - Key pair: Select or create a new keypair
     - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/sonarqube-install.sh
     - Launch Instance
 
 4) Nexus
-    - Create an Amazon Linux 2 VM instance 
+    - Create an Ubuntu 22.04 VM instance 
     - Name: Nexus
-    - Instance type: t2.medium
+    - Instance type: e2-standard-2
     - Security Group (Eit/Open): 8081, 9100 and 22 to 0.0.0.0/0
     - Key pair: Select or create a new keypair
     - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/nexus-install.sh
@@ -57,7 +57,7 @@
     - Create CentOS 7 VM instance
     - Names: Dev-Env, Stage-Env and Prod-Env
     - Number: `3`
-    - Instance type: t2.micro
+    - Instance type: e2-medium
     - Security Group (Eit/Open): 8080, 9100, 9997 and 22 to 0.0.0.0/0
     - Key pair: Select or create a new keypair
     - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/tomcat-splunk-installation/tomcat-ssh-configure.sh
