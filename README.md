@@ -1,5 +1,5 @@
 # End-to-End Jenkins CI/CD Pipeline Project Architecture (Java Web Application)
-![CompleteCICDProject!](https://github.com/awanmbandi/gcp-realworld-cicd-pipeline-project/blob/zdocs/images/gcp_realworld_cicd_pipeline_project_arch.png) 
+![CompleteCICDProject!](https://github.com/awanmbandi/gcp-realworld-cicd-pipeline-project/blob/zdocs/images/gcp_realworld_cicd_pipeline_project_archv2.png) 
 
 ###### Project ToolBox 🧰
 - [Git](https://git-scm.com/) Git will be used to manage our application source code.
