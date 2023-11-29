@@ -91,42 +91,41 @@ pipeline {
            )
         }
     }
-    stage('Deploy to Development Env') {
-        environment {
-            HOSTS = 'dev'
-        }
-        steps {
-            withCredentials([usernamePassword(credentialsId: 'Ansible-Credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
-                sh "ansible-playbook -i ${WORKSPACE}/ansible-config/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
-            }
-        }
-    }
-    stage('Deploy to Staging Env') {
-        environment {
-            HOSTS = 'stage'
-        }
-        steps {
-            withCredentials([usernamePassword(credentialsId: 'Ansible-Credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
-                sh "ansible-playbook -i ${WORKSPACE}/ansible-config/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
-            }
-        }
-    }
-    stage('Quality Assurance Approval') {
-        steps {
-            input('Do you want to proceed?')
-        }
-    }
-    stage('Deploy to Production Env') {
-        environment {
-            HOSTS = 'prod'
-        }
-        steps {
-            withCredentials([usernamePassword(credentialsId: 'Ansible-Credential', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
-                sh "ansible-playbook -i ${WORKSPACE}/ansible-config/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
-            }
-         }
+    stage('Deploy to DEV') {
+      environment {
+        HOSTS = "dev"
       }
-   }
+      steps {
+        sh "ansible-playbook ${WORKSPACE}/deploy.yaml --extra-vars \"hosts=$HOSTS workspace_path=$WORKSPACE\""
+      }
+     }
+    // stage('Approval for stage') {
+    //   steps {
+    //     input('Do you want to proceed?')
+    //   }
+    // }
+    stage('Deploy to Stage') {
+      environment {
+        HOSTS = "stage" // Make sure to update to "stage"
+      }
+      steps {
+        sh "ansible-playbook ${WORKSPACE}/deploy.yaml --extra-vars \"hosts=$HOSTS workspace_path=$WORKSPACE\""
+      }
+    }
+    stage('Approval') {
+      steps {
+        input('Do you want to proceed?')
+      }
+    }
+    stage('Deploy to PROD') {
+      environment {
+        HOSTS = "prod"
+        }
+        steps {
+            sh "ansible-playbook ${WORKSPACE}/deploy.yaml --extra-vars \"hosts=$HOSTS workspace_path=$WORKSPACE\""
+        }
+     }
+  }
   post {
     always {
         echo 'Slack Notifications.'
