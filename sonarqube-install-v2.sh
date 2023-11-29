@@ -29,7 +29,7 @@ psql
 ## Set password and grant privileges
 ALTER USER sonar WITH ENCRYPTED password 'sonar';
 CREATE DATABASE sonarqube OWNER sonar;
-grant all privileges on DATABASE sonarqube to sonar;
+GRANT all privileges on DATABASE sonarqube to sonar;
 
 ## Exit the Database by running 
 exit
