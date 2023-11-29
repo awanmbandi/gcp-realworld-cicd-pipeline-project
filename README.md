@@ -30,27 +30,24 @@
     - Create an Ubuntu 22.04 VM instance 
     - Name: Jenkins/Maven/Ansible
     - Instance type: e2-standard-2
-    - Security Group (Edit/Open): 8080, 9100 and 22 to 0.0.0.0/0
-    - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/jenkins-install.sh
+    - Firewall Rules (Open): 8080, 9100 and 22 to 0.0.0.0/0
+    - User Script (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/jenkins-install.sh
     - Launch Instance
 
 3) SonarQube
     - Create an Create an Ubuntu 22.04 VM instance 
     - Name: SonarQube
     - Instance type: e2-standard-2
-    - Security Group (Eit/Open): 9000, 9100 and 22 to 0.0.0.0/0
-    - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/sonarqube-install.sh
+    - Firewall Rules (Open): 9000, 9100 and 22 to 0.0.0.0/0
+    - User Script (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/sonarqube-install.sh
     - Launch Instance
 
 4) Nexus
     - Create an Ubuntu 22.04 VM instance 
     - Name: Nexus
     - Instance type: e2-standard-2
-    - Security Group (Eit/Open): 8081, 9100 and 22 to 0.0.0.0/0
-    - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/nexus-install.sh
+    - Firewall Rules (Open): 8081, 9100 and 22 to 0.0.0.0/0
+    - User Script (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/nexus-install.sh
     - Launch Instance
 
 5) GCE (Dev/Stage/Prod)
@@ -58,9 +55,8 @@
     - Names: Dev-Env, Stage-Env and Prod-Env
     - Number: `3`
     - Instance type: e2-medium
-    - Security Group (Eit/Open): 8080, 9100, 9997 and 22 to 0.0.0.0/0
-    - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/tomcat-splunk-installation/tomcat-ssh-configure.sh
+    - Firewall Rules (Open): 8080, 9100, 9997 and 22 to 0.0.0.0/0
+    - User Script (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/tomcat-splunk-installation/tomcat-ssh-configure.sh
     - Launch Instance
 
 #### NOTE: Confirm and make sure you have a total of 8 VM instances
