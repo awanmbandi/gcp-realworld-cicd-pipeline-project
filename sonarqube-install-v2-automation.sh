@@ -99,8 +99,8 @@ WantedBy=multi-user.target" | sudo tee /etc/systemd/system/sonar.service
 
 ## Start Sonarqube and Enable service
 sudo systemctl start sonar
-sudo systemctl enable sonar
 sudo systemctl status sonar
+sudo systemctl enable sonar
 
 ## Watch log files and monitor for startup
 sudo tail -f /opt/sonarqube/logs/sonar.log
