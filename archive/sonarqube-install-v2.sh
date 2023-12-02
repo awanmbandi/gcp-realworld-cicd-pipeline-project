@@ -15,7 +15,7 @@ psql --version
 ## Create Database for Sonarqube
 
 ## Set password for postgres user (Password `postgres`)
-sudo passwd postgres
+echo 'postgres:postgres' | sudo chpasswd
 
 ## Change to the postgres user
 su - postgres
@@ -46,15 +46,13 @@ echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.n
 ## Install Java 17¶
 apt update -y
 apt install temurin-17-jdk -y
-update-alternatives --config java
-/usr/bin/java --version
 
 ## Exit back to your normal user
 exit 
 
 #Linux Kernel Tuning¶
 ## Increase Limits¶
-sudo vi /etc/security/limits.conf
+vi /etc/security/limits.conf
 ```bash
 sonarqube   -   nofile   65536
 sonarqube   -   nproc    4096
@@ -62,24 +60,24 @@ sonarqube   -   nproc    4096
 
 ##Increase Mapped Memory Regions
 ### Paste the below values at the bottom of the file
-sudo vi /etc/sysctl.conf
+vi /etc/sysctl.conf
 ```bash
 vm.max_map_count = 262144
 ```
 
 ## Download, Extract and Install SonarQube
-sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.0.65466.zip
-sudo apt install unzip -y
-sudo unzip sonarqube-9.9.0.65466.zip -d /opt
-sudo mv /opt/sonarqube-9.9.0.65466 /opt/sonarqube
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.0.65466.zip
+apt install unzip -y
+unzip sonarqube-9.9.0.65466.zip -d /opt
+mv /opt/sonarqube-9.9.0.65466 /opt/sonarqube
 
 ## Create user and set permissions
-sudo groupadd sonar
-sudo useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar
-sudo chown sonar:sonar /opt/sonarqube -R
+groupadd sonar
+useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar
+chown sonar:sonar /opt/sonarqube -R
 
 ## Update Sonarqube properties with DB credentials
-sudo vi /opt/sonarqube/conf/sonar.properties
+vi /opt/sonarqube/conf/sonar.properties
 ```bash
 sonar.jdbc.username=sonar
 sonar.jdbc.password=sonar
@@ -87,7 +85,7 @@ sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
 ```
 
 ## Create service for Sonarqube
-sudo vi /etc/systemd/system/sonar.service
+vi /etc/systemd/system/sonar.service
 ```bash
 [Unit]
 Description=SonarQube service

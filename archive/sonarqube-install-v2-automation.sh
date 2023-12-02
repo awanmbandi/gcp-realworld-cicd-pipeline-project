@@ -34,7 +34,7 @@ GRANT all privileges on DATABASE sonarqube to sonar;
 exit
 
 ## Exit Again back to normal or root user
-## exit
+exit
 
 #Adoptium Java 17¶
 ## Switch to root user
