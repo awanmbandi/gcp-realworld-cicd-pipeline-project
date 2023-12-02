@@ -1,4 +1,7 @@
 #!/bin/bash
+## VM Instaructions
+# Image: Ubuntu 22.04
+# Instance type: 2CPU and 4 or 8+RAM
 sudo su
 apt-get update -y
 apt install openjdk-8-jre-headless -y
