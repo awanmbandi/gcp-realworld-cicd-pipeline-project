@@ -370,17 +370,58 @@ A) Update Maven `POM.xml` file
 #!/bin/bash
 # Tomcat Server Installation
 sudo su
-amazon-linux-extras install tomcat8.5 -y
-systemctl enable tomcat
-systemctl start tomcat
-
-# Provisioning Ansible Deployer Access
-useradd ansibleadmin
-echo ansibleadmin | passwd ansibleadmin --stdin
-sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-systemctl restart sshd
-echo "ansibleadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+..........continue
 ```
+
+### B) Setup Ansible in Jenkins Instance (Instance 1) 🡪 For deployment
+
+* Install and Configure Ansible and Tomcat
+```bash
+#!/bin/bash
+## Install Ansible 
+sudo yum install ansible -y
+ansible --version
+
+## Configure Ansible friendly environment
+sudo useradd ansible
+sudo sh -c 'echo ansible:ansibleadmin | chpasswd'
+sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+sudo sed -i "s/.*#PermitRootLogin yes/PermitRootLogin yes/g" /etc/ssh/sshd_config
+sudo service sshd restart
+sudo echo "ansible ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+## Install Tomcat
+sudo yum install tomcat -y
+sudo systemctl enable tomcat
+sudo systemctl start tomcat
+sudo systemctl status tomcat
+
+## Wget
+sudo yum install wget -y
+```
+
+### Navigate 
+```bash
+cd /etc/ansible/
+```
+
+### Edit Ansible Config Files
+```bash
+vi /hosts/ansible.cfg ### (uncomment host_key_checking = False)
+
+vi /hosts/hosts ### (enter below content)
+
+[dev]
+3.108.227.139 ansible_user=ansadmin ansible_password=ansadmin
+
+[stage]
+3.108.227.139 ansible_user=ansadmin ansible_password=ansadmin
+
+[prod]
+3.108.227.139 ansible_user=ansadmin ansible_password=ansadmin
+```
+
+### Run Test 
 
 ### Setup a CI Integration Between `GitHub` and `Jenkins`
 1. Navigate to your GitHub project repository
