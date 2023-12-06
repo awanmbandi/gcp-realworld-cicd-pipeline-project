@@ -409,6 +409,10 @@ sudo yum install wget -y
 ```bash
 sudo vi /etc/ansible/ansible.cfg ### (uncomment host_key_checking = False)
 ```
+```yaml
+[defaults]
+host_key_checking = False
+```
 
 ### Edit The Ansible Hosts Inventory File
 ```bash
