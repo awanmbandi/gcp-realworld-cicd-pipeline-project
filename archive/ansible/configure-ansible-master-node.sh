@@ -12,11 +12,5 @@ sudo service sshd restart
 sudo su
 echo "ansible ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-## Install Tomcat
-yum install tomcat -y
-systemctl enable tomcat
-systemctl start tomcat
-systemctl status tomcat
-
 ## Wget
 yum install wget -y
