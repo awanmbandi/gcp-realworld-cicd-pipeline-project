@@ -401,10 +401,6 @@ sudo yum install wget -y
 ```
 
 ### Navigate 
-```bash
-cd /etc/ansible/
-```
-
 ### Edit Ansible Config Files
 ```bash
 vi /hosts/ansible.cfg ### (uncomment host_key_checking = False)
