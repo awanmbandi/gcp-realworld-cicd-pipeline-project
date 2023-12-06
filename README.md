@@ -405,16 +405,16 @@ sudo yum install wget -y
 ```bash
 vi /hosts/ansible.cfg ### (uncomment host_key_checking = False)
 
-vi /hosts/hosts ### (enter below content)
-
+sudo bash -c 'cat << EOF >> /etc/ansible/hosts
 [dev]
-3.108.227.139 ansible_user=ansadmin ansible_password=ansadmin
+DEV_VM_IP ansible_user=ansible ansible_password=ansibleadmin
 
 [stage]
-3.108.227.139 ansible_user=ansadmin ansible_password=ansadmin
+STAGE_VM_IP ansible_user=ansible ansible_password=ansibleadmin
 
 [prod]
-3.108.227.139 ansible_user=ansadmin ansible_password=ansadmin
+PROD_VM_IP ansible_user=ansible ansible_password=ansibleadmin
+EOF'
 ```
 
 ### Run Test
