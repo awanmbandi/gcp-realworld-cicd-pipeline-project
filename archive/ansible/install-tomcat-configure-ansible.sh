@@ -1,9 +1,5 @@
 #!/bin/bash
-## Install Ansible 
-sudo yum install ansible -y
-ansible --version
-
-## Configure Ansible friendly environment
+## Configure Ansible Client Node Environment
 sudo useradd ansible
 sudo sh -c 'echo ansible:ansibleadmin | chpasswd'
 sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
