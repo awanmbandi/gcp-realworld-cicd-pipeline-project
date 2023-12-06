@@ -406,7 +406,7 @@ sudo yum install wget -y
 ### Navigate 
 ### Edit Ansible Config Files
 ```bash
-vi /hosts/ansible.cfg ### (uncomment host_key_checking = False)
+sudo vi /etc/ansible/ansible.cfg ### (uncomment host_key_checking = False)
 ```
 
 ### Edit The Ansible Hosts Inventory File
@@ -423,6 +423,12 @@ PROD_VM_IP ansible_user=ansible ansible_password=ansibleadmin
 EOF'
 ```
 
+### MUST LOGIN As The USER ANSIBLE
+```bash
+ssh ansible@JENKINS_SERVER_EXTERNAL_IP
+## Password is "ansibleadmin"
+``` 
+
 ### Create an ssh key in the master server and copy it to node servers This will create a .ssh folder (/home/ansadm/.ssh). Hit enter all the way  through 
 ```bash
 ssh-keygen -t rsa 
@@ -434,8 +440,9 @@ chmod 700 /home/ansible/.ssh
 ```
 #### ssh-copy-id ansible@ip address of you ansible-node1 #ssh-copy-id ansible@ip address of you ansible-node2 
 ```bash
-ssh ansible@ip address of your ansible-node1 
-ssh ansible@ip address of your ansible-node2
+ssh-copy-id ansible@ip address of your dev
+ssh-copy-id ansible@ip address of your stage 
+ssh-copy-id ansible@ip address of your prod 
 ## Now all three servers are configured, ansible control server can do ssh on both the servers 
 ```
 #### Test Connectivity From Master to Clients
