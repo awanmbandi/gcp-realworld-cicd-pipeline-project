@@ -373,16 +373,19 @@ sudo su
 ..........continue
 ```
 
-### B) Setup Ansible in Jenkins Instance (Instance 1) 🡪 For deployment
+### A) Setup The Dev, Stage and Prod Environments
+- Use the userdata: 
 
+### B) Setup Ansible in Jenkins Instance (Instance 1) 🡪 For deployment
+* Login/SSH into the Ansible Control Node
 * Install and Configure Ansible and Tomcat
 ```bash
 #!/bin/bash
-## Install Ansible 
+## Install Ansible (COMPLETED)
 sudo yum install ansible -y
 ansible --version
 
-## Configure Ansible friendly environment
+## Configure Ansible friendly environment (COMPLETED)
 sudo useradd ansible
 sudo sh -c 'echo ansible:ansibleadmin | chpasswd'
 sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
@@ -390,13 +393,13 @@ sudo sed -i "s/.*#PermitRootLogin yes/PermitRootLogin yes/g" /etc/ssh/sshd_confi
 sudo service sshd restart
 sudo echo "ansible ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-## Install Tomcat
+## Install Tomcat (NOT NOT COMPLETED)
 sudo yum install tomcat -y
 sudo systemctl enable tomcat
 sudo systemctl start tomcat
 sudo systemctl status tomcat
 
-## Wget
+## Wget (NOT NOT COMPLETED)
 sudo yum install wget -y
 ```
 
@@ -404,7 +407,10 @@ sudo yum install wget -y
 ### Edit Ansible Config Files
 ```bash
 vi /hosts/ansible.cfg ### (uncomment host_key_checking = False)
+```
 
+### Edit The Ansible Hosts Inventory File
+```bash
 sudo bash -c 'cat << EOF >> /etc/ansible/hosts
 [dev]
 DEV_VM_IP ansible_user=ansible ansible_password=ansibleadmin
@@ -417,7 +423,26 @@ PROD_VM_IP ansible_user=ansible ansible_password=ansibleadmin
 EOF'
 ```
 
-### Run Test
+### Create an ssh key in the master server and copy it to node servers This will create a .ssh folder (/home/ansadm/.ssh). Hit enter all the way  through 
+```bash
+ssh-keygen -t rsa 
+```
+
+#### This will create a .ssh folder (/home/ansible/.ssh). Hit enter all the way  through 
+```bash
+chmod 700 /home/ansible/.ssh 
+```
+#### ssh-copy-id ansible@ip address of you ansible-node1 #ssh-copy-id ansible@ip address of you ansible-node2 
+```bash
+ssh ansible@ip address of your ansible-node1 
+ssh ansible@ip address of your ansible-node2
+## Now all three servers are configured, ansible control server can do ssh on both the servers 
+```
+#### Test Connectivity From Master to Clients
+- Now try to ssh to the client VM’s to confirm ansible will not be required to provide a password anymore.
+check connectivity of hosts is 
+
+### Run Pipeline Test
 
 ### Setup a CI Integration Between `GitHub` and `Jenkins`
 1. Navigate to your GitHub project repository
