@@ -421,7 +421,7 @@ vi /hosts/hosts ### (enter below content)
 3.108.227.139 ansible_user=ansadmin ansible_password=ansadmin
 ```
 
-### Run Test 
+### Run Test
 
 ### Setup a CI Integration Between `GitHub` and `Jenkins`
 1. Navigate to your GitHub project repository
