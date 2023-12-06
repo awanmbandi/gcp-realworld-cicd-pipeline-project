@@ -56,7 +56,7 @@
     - Number: `3`
     - Instance type: e2-medium
     - Firewall Rules (Open): 8080, 9100, 9997 and 22 to 0.0.0.0/0
-    - User Script (Copy the following user data): https://github.com/awanmbandi/realworld-cicd-pipeline-project/blob/tomcat-splunk-installation/tomcat-ssh-configure.sh
+    - User Script (Copy the following user data): https://github.com/awanmbandi/gcp-realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/archive/ansible/configure-ansible-client-install-tomcat.sh
     - Launch Instance
 
 #### NOTE: Confirm and make sure you have a total of 8 VM instances
@@ -374,24 +374,25 @@ sudo su
 ```
 
 ### A) Setup The Dev, Stage and Prod Environments
-- Use the userdata: 
+- Use the userdata: https://github.com/awanmbandi/gcp-realworld-cicd-pipeline-project/blob/maven-nexus-sonarqube-jenkins-install/archive/ansible/configure-ansible-client-install-tomcat.sh
 
 ### B) Setup Ansible in Jenkins Instance (Instance 1) 🡪 For deployment
 * Login/SSH into the Ansible Control Node
 * Install and Configure Ansible and Tomcat
 ```bash
 #!/bin/bash
-## Install Ansible (COMPLETED)
-sudo yum install ansible -y
-ansible --version
+# ## Install Ansible (COMPLETED)
+# sudo yum install ansible -y
+# ansible --version
 
-## Configure Ansible friendly environment (COMPLETED)
-sudo useradd ansible
-sudo sh -c 'echo ansible:ansibleadmin | chpasswd'
-sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
-sudo sed -i "s/.*#PermitRootLogin yes/PermitRootLogin yes/g" /etc/ssh/sshd_config
-sudo service sshd restart
-sudo echo "ansible ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+# ## Configure Ansible friendly environment (COMPLETED)
+sudo userdel ansible
+sudo useradd ansible -m
+# sudo sh -c 'echo ansible:ansibleadmin | chpasswd'
+# sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+# sudo sed -i "s/.*#PermitRootLogin yes/PermitRootLogin yes/g" /etc/ssh/sshd_config
+# sudo service sshd restart
+# sudo echo "ansible ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 ## Install Tomcat (NOT NOT COMPLETED)
 sudo yum install tomcat -y
