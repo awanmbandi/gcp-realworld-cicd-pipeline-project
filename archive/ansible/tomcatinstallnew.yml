@@ -1,0 +1,61 @@
+---
+  - name: install and configure tomcat
+    hosts: apache
+    gather_facts: false
+    become: yes
+    vars:
+      req_tomcat_ver: 8.5.0
+      req_port: 8888
+      tomcat_url: https://archive.apache.org/dist/tomcat/tomcat-8/v{{req_tomcat_ver}}/bin/apache-tomcat-{{req_tomcat_ver}}.tar.gz
+    tasks:
+    # update packages
+    - name: updating repos
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+    # Install java
+    - name: Installating java
+      apt: name=default-jdk state=latest
+    # Download tomcat tar file
+    - name: downloading required tomcat
+      get_url:
+        url: "{{tomcat_url}}"
+        dest: /usr/local
+    # Extract tomcat tar file
+    - name: extract downloading tomcat
+      unarchive:
+        src: "/usr/local/apache-tomcat-{{req_tomcat_ver}}.tar.gz"
+        dest: /usr/local
+        remote_src: yes
+    # copy tomcat-users.xml file
+    - name: copy the files
+      copy:
+        src: tomcatusers.xml
+        dest: /usr/local/apache-tomcat-{{req_tomcat_ver}}/conf/tomcat-users.xml
+    # Change default port in server.xml
+    - name: change port no
+      lineinfile:
+        path: /usr/local/apache-tomcat-{{req_tomcat_ver}}/conf/server.xml
+        regexp: '<Connector port="8080" protocol="HTTP/1.1"'
+        line: ' <Connector port="8888" protocol="HTTP/1.1"'
+        remote_src: yes
+    # Copy context.xml file
+    - name: copy the context file
+      copy:
+        src: context.xml
+        dest: /usr/local/apache-tomcat-{{req_tomcat_ver}}/webapps/manager/META-INF
+    # Download war files from git
+    - name: download war file
+      git:
+        repo: https://github.com/sugreevudu/docker.git
+        dest: /tmp/webapps
+    # Copy app folder in webapps directory
+    - name: copy the war file
+      copy:
+        src: /tmp/webapps/tarpetclinicget/
+        dest: /usr/local/apache-tomcat-{{req_tomcat_ver}}/webapps/
+        remote_src: yes
+    # shutdown and start tomcat
+    - name: starting tomcat
+      shell: /usr/local/apache-tomcat-{{req_tomcat_ver}}/bin/shutdown.sh && nohup /usr/local/apache-tomcat-{{req_tomcat_ver}}/bin/startup.sh
+
