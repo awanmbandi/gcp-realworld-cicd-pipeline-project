@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        git 'Git'
+    }
     stages {
         stage('Validate Project') {
             steps {
