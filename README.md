@@ -20,7 +20,7 @@
     - Login to your GitHub Account
     - Create a Repository called "Jenkins-CICD-Project"
     - Clone the Repository in the "Repository" directory/folder in your local
-    - Download the code in in this repository "Main branch": https://github.com/awanmbandi/realworld-cicd-pipeline-project.git
+    - Download the code in in this repository "Main branch": https://github.com/awanmbandi/gcp-realworld-cicd-pipeline-project.git
     - Unzip the code/zipped file
     - Copy and Paste everything from the zipped file into the repository you cloned in your local
     - Add the code to git, commit and push it to your upstream branch "main or master"
